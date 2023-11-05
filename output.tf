@@ -48,3 +48,12 @@ output "raid_template" {
     }
   )
 }
+
+output "zsh_setup_template" {
+  value = templatefile(
+    "${path.module}/templates/zsh_setup.sh.tftpl",
+    {
+      user = var.zsh_setup_template_user,
+    }
+  )
+}

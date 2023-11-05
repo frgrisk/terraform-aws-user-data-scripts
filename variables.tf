@@ -32,3 +32,8 @@ variable "raid_template_mount_perms" {
   type    = string
   default = "0755"
 }
+
+variable "zsh_setup_template_user" {
+  type    = string
+  default = "ec2-user"
+}
