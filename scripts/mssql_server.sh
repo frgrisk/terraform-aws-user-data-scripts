@@ -1,6 +1,6 @@
 # Install MSSQL
 set -x
-curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/9/mssql-server-preview.repo
+curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/8/mssql-server-2022.repo
 yum install -y mssql-server
 MSSQL_PID=Developer ACCEPT_EULA=Y MSSQL_SA_PASSWORD="$(openssl rand -base64 32 | tr -- '+/' '-_')" /opt/mssql/bin/mssql-conf -n setup
 curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/8/prod.repo
