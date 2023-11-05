@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Raid Array for playpens
+yum install -y mdadm
+mdadm --create --verbose /dev/md0 --level=0 --name=${volume_name} --raid-devices=10 /dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1 /dev/nvme4n1 /dev/nvme5n1 /dev/nvme6n1 /dev/nvme7n1 /dev/nvme8n1 /dev/nvme9n1 /dev/nvme10n1
+mkfs.xfs -L ${volume_name} /dev/md0
+mdadm --detail --scan | tee -a /etc/mdadm.conf
+dracut -H -f /boot/initramfs-$(uname -r).img $(uname -r)
+mkdir -p ${mount_point}
+chown ${mount_user}:${mount_group} ${mount_point}
+chmod ${mount_perms} ${mount_point}
+echo "UUID=$(blkid -o value -s UUID /dev/md0) ${mount_point} xfs defaults,nofail 0 2" | tee -a /etc/fstab
+mount -a
