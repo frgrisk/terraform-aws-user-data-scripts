@@ -7,7 +7,7 @@ mkfs.xfs -L ${volume_name} /dev/md0
 mdadm --detail --scan | tee -a /etc/mdadm.conf
 dracut -H -f /boot/initramfs-$(uname -r).img $(uname -r)
 mkdir -p ${mount_point}
-chown ${mount_user}:${mount_group} ${mount_point}
-chmod ${mount_perms} ${mount_point}
 echo "UUID=$(blkid -o value -s UUID /dev/md0) ${mount_point} xfs defaults,nofail 0 2" | tee -a /etc/fstab
 mount -a
+chown ${mount_user}:${mount_group} ${mount_point}
+chmod ${mount_perms} ${mount_point}
