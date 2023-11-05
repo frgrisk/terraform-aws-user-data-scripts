@@ -14,6 +14,10 @@ output "mssql_odbc_script" {
   value = file("${path.module}/scripts/mssql_odbc.sh")
 }
 
+output "mssql_server" {
+  value = file("${path.module}/scripts/mssql_server.sh")
+}
+
 output "disable_selinux_script" {
   value = file("${path.module}/scripts/disable_selinux.sh")
 }
