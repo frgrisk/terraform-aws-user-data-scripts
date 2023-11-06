@@ -26,6 +26,17 @@ output "password_login_script" {
   value = file("${path.module}/scripts/password_login.sh")
 }
 
+output "certbot_template" {
+  value = templatefile(
+    "${path.module}/templates/certbot.sh.tftpl",
+    {
+      email     = var.certbot_template_email,
+      domain    = var.certbot_template_domain,
+      test_cert = var.certbot_template_test_cert,
+    }
+  )
+}
+
 output "useradd_template" {
   value = templatefile(
     "${path.module}/templates/useradd.sh.tftpl",
@@ -40,12 +51,10 @@ output "river_guide_template" {
   value = templatefile(
     "${path.module}/templates/river_guide.sh.tftpl",
     {
-      certbot_email = var.river_guide_template_certbot_email,
-      domain        = var.river_guide_template_domain,
-      tags          = var.river_guide_template_tags,
-      title         = var.river_guide_template_title,
-      color         = var.river_guide_template_color,
-      region        = var.river_guide_template_region,
+      tags   = var.river_guide_template_tags,
+      title  = var.river_guide_template_title,
+      color  = var.river_guide_template_color,
+      region = var.river_guide_template_region,
     }
   )
 }

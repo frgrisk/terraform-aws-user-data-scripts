@@ -38,14 +38,20 @@ variable "zsh_setup_template_user" {
   default = "ec2-user"
 }
 
-variable "river_guide_template_certbot_email" {
+variable "certbot_template_email" {
   type    = string
   default = ""
 }
 
-variable "river_guide_template_domain" {
+variable "certbot_template_domain" {
   type    = string
   default = ""
+}
+
+variable "certbot_template_test_cert" {
+  type        = bool
+  default     = false
+  description = "Request a certificate from Let's Encrypt staging servers to prevent rate limiting."
 }
 
 variable "river_guide_template_tags" {

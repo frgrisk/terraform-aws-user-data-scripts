@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Install Certbot
+yum install -y python3 augeas-libs
+python3 -m venv /opt/certbot/
+/opt/certbot/bin/pip install --upgrade pip
+/opt/certbot/bin/pip install certbot
+ln -s /opt/certbot/bin/certbot /usr/bin/certbot
+certbot certonly --standalone -d ${domain} -m ${email} --agree-tos -n %{if test_cert}--test-cert%{endif}
+echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | tee -a /etc/crontab > /dev/null
+
+# Install Cronie (not included in Amazon Linux 2023 by default)
+dnf install -y cronie
+systemctl enable --now crond
