@@ -36,6 +36,20 @@ output "useradd_template" {
   )
 }
 
+output "river_guide_template" {
+  value = templatefile(
+    "${path.module}/templates/river_guide.sh.tftpl",
+    {
+      certbot_email = var.river_guide_template_certbot_email,
+      domain        = var.river_guide_template_domain,
+      tags          = var.river_guide_template_tags,
+      title         = var.river_guide_template_title,
+      color         = var.river_guide_template_color,
+      region        = var.river_guide_template_region,
+    }
+  )
+}
+
 output "raid_template" {
   value = templatefile(
     "${path.module}/templates/raid.sh.tftpl",

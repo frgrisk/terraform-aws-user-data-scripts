@@ -1,0 +1,14 @@
+#!/bin/bash
+# Check for ARM instance
+if [[ $(uname -m) == aarch64 ]]; then
+   GOARCH=arm64
+else
+   GOARCH=amd64
+fi
+curl -L https://github.com/frgrisk/river-guide/releases/download/v0.1.1/river-guide-linux-$GOARCH --output /opt/river-guide
+chmod 755 /opt/river-guide
+echo "@reboot root AWS_REGION=${region} /opt/river-guide %{if tags != null}--tags ${tags} %{endif}--title '${title}' --primary-color '${color}'" | tee -a /etc/crontab > /dev/null
+
+# Install Cronie (not included in Amazon Linux 2023 by default)
+dnf install -y cronie
+systemctl enable --now crond
