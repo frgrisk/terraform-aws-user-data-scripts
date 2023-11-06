@@ -78,3 +78,9 @@ variable "river_guide_template_region" {
   type    = string
   default = "us-east-1"
 }
+
+variable "mssql_server_template_password" {
+  type      = string
+  default   = ""
+  sensitive = true
+}

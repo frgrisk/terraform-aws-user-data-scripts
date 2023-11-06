@@ -14,8 +14,12 @@ output "mssql_odbc_script" {
   value = file("${path.module}/scripts/mssql_odbc.sh")
 }
 
-output "mssql_server" {
-  value = file("${path.module}/scripts/mssql_server.sh")
+output "mssql_server_template" {
+  value = templatefile(
+    "${path.module}/templates/mssql_server.sh.tftpl",
+    { password = var.mssql_server_template_password },
+  )
+  sensitive = true
 }
 
 output "disable_selinux_script" {
