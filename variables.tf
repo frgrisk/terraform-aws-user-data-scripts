@@ -8,6 +8,11 @@ variable "useradd_template_group" {
   default = ""
 }
 
+variable "raid_template_raid_devices" {
+  type    = string
+  default = "/dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1 /dev/nvme4n1 /dev/nvme5n1 /dev/nvme6n1 /dev/nvme7n1 /dev/nvme8n1 /dev/nvme9n1 /dev/nvme10n1"
+}
+
 variable "raid_template_volume_name" {
   type    = string
   default = ""

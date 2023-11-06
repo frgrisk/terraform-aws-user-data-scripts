@@ -63,11 +63,12 @@ output "raid_template" {
   value = templatefile(
     "${path.module}/templates/raid.sh.tftpl",
     {
-      volume_name = var.raid_template_volume_name,
-      mount_point = var.raid_template_mount_point,
-      mount_user  = var.raid_template_mount_user,
-      mount_group = var.raid_template_mount_group,
-      mount_perms = var.raid_template_mount_perms,
+      volume_name  = var.raid_template_volume_name,
+      mount_point  = var.raid_template_mount_point,
+      mount_user   = var.raid_template_mount_user,
+      mount_group  = var.raid_template_mount_group,
+      mount_perms  = var.raid_template_mount_perms,
+      raid_devices = var.raid_template_raid_devices,
     }
   )
 }

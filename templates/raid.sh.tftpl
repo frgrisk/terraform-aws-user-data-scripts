@@ -2,7 +2,7 @@
 
 # Raid Array for playpens
 yum install -y mdadm
-mdadm --create --verbose /dev/md0 --level=0 --name=${volume_name} --raid-devices=10 /dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1 /dev/nvme4n1 /dev/nvme5n1 /dev/nvme6n1 /dev/nvme7n1 /dev/nvme8n1 /dev/nvme9n1 /dev/nvme10n1
+mdadm --create --verbose /dev/md0 --level=0 --name=${volume_name} --raid-devices=10 ${raid_devices}
 mkfs.xfs -L ${volume_name} /dev/md0
 mdadm --detail --scan | tee -a /etc/mdadm.conf
 dracut -H -f /boot/initramfs-$(uname -r).img $(uname -r)
