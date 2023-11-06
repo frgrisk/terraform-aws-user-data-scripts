@@ -1,6 +1,7 @@
 #!/bin/bash
 yum update -y
 yum install -y git zsh util-linux-user
-su ${user} -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-chsh -s /bin/zsh ${user}
-su ${user} -c "sed -i 's/^ZSH_THEME=.*/ZSH_THEME=\"agnoster\"/' ~/.zshrc"
+if su ${user} -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; then
+  chsh -s /bin/zsh ${user}
+  su ${user} -c "sed -i 's/^ZSH_THEME=.*/ZSH_THEME=\"agnoster\"/' ~/.zshrc"
+fi
