@@ -84,3 +84,8 @@ variable "mssql_server_template_password" {
   default   = ""
   sensitive = true
 }
+
+variable "github_actions_runner_directory" {
+  type    = string
+  default = "/opt/actions-runner"
+}

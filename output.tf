@@ -6,6 +6,13 @@ output "base_windows" {
   value = file("${path.module}/scripts/base.bat")
 }
 
+output "github_actions_runner_template" {
+  value = templatefile(
+    "${path.module}/templates/github_actions_runner.sh.tftpl",
+    { directory = var.github_actions_runner_directory },
+  )
+}
+
 output "mssql_tools_script" {
   value = file("${path.module}/scripts/mssql_tools.sh")
 }
