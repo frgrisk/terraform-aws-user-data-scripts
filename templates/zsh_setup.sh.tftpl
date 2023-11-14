@@ -1,6 +1,9 @@
 #!/bin/bash
-yum update -y
-yum install -y git zsh util-linux-user
+if [ -f /etc/debian_version ]; then
+  apt-get install -y git zsh
+else
+  yum install -y git zsh util-linux-user
+fi
 if su ${user} -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; then
   chsh -s /bin/zsh ${user}
   su ${user} -c "sed -i 's/^ZSH_THEME=.*/ZSH_THEME=\"agnoster\"/' ~/.zshrc"
