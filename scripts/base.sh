@@ -1,8 +1,15 @@
 #!/bin/bash
 set -e
 set -x
-yum update -y
-yum install -y git vim jq python3 unzip zsh
+
+if [ -f /etc/debian_version ]; then
+  apt-get update
+  apt-get upgrade -y
+  apt-get install -y git vim jq python3 unzip zsh
+else
+  yum update -y
+  yum install -y git vim jq python3 unzip zsh
+fi
 
 # Install AWS CLI if necessary
 if ! command -v aws > /dev/null; then
@@ -20,6 +27,7 @@ chmod a+x /etc/profile.d/umask.sh
 
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 instance_id=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id)
+aws configure list
 # shellcheck disable=SC2016
 while [ -z "$HOSTNAME_TAG" ]
 do
