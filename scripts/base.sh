@@ -7,7 +7,7 @@ if [ -f /etc/debian_version ]; then
   apt-get upgrade -y
   apt-get install -y git vim jq python3 unzip zsh
 else
-  yum update -y
+  ACCEPT_EULA=Y yum update -y
   yum install -y git vim jq python3 unzip zsh
 fi
 
