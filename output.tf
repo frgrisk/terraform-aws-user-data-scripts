@@ -1,5 +1,19 @@
 output "base_script" {
-  value = file("${path.module}/scripts/base.sh")
+  value = templatefile(
+    "${path.module}/templates/base.sh.tftpl",
+    {
+      package_update = true,
+    }
+  )
+}
+
+output "base_script_no_package_update" {
+  value = templatefile(
+    "${path.module}/templates/base.sh.tftpl",
+    {
+      package_update = false,
+    }
+  )
 }
 
 output "base_windows" {
