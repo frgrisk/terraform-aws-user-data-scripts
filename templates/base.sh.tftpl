@@ -2,7 +2,7 @@
 set -e
 set -x
 
-${if package_update }
+%{ if package_update }
 if [ -f /etc/debian_version ]; then
   apt-get update
   apt-get upgrade -y
@@ -11,7 +11,7 @@ else
   ACCEPT_EULA=Y yum update -y
   yum install -y git vim jq python3 unzip zsh
 fi
-${end}
+%{ endif }
 
 # Install AWS CLI if necessary
 if ! command -v aws > /dev/null; then
