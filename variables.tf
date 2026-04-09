@@ -69,9 +69,32 @@ variable "river_guide_template_title" {
   default = "Environment Control"
 }
 
-variable "river_guide_template_color" {
+variable "river_guide_template_port" {
   type    = string
-  default = "#000000"
+  default = "3000"
+}
+
+variable "river_guide_template_background_color" {
+  type    = string
+  default = "#244A66"
+}
+
+variable "river_guide_template_accent_color" {
+  type    = string
+  default = "#93C30B"
+}
+
+variable "river_guide_template_oidc" {
+  type = object({
+    issuer         = string
+    client_id      = string
+    client_secret  = string
+    redirect_url   = string
+    groups         = optional(string)
+    scopes         = optional(string)
+    log_claims     = optional(string)
+  })
+  default = null
 }
 
 variable "river_guide_template_region" {
