@@ -8,7 +8,7 @@ fi
 curl -L https://github.com/frgrisk/river-guide/releases/download/v0.3.0/river-guide-linux-$GOARCH --output /opt/river-guide
 chmod 755 /opt/river-guide
 echo "export RIVER_GUIDE_OIDC_CLIENT_SECRET='${oidc_config.client_secret}'" >> ~/.bashrc
-echo "@reboot root . ~/.bashrc AWS_REGION=${region} /opt/river-guide %{if tags != null}--tags ${tags} %{endif}--title '${title}' \
+echo "@reboot root . ~/.bashrc && AWS_REGION=${region} /opt/river-guide %{if tags != null}--tags ${tags} %{endif}--title '${title}' \
 --background-color='${background_color}' \
 --accent-color='${accent_color}' \
 %{ if oidc_config != null ~}
