@@ -81,6 +81,7 @@ output "river_guide_template" {
       background_color = var.river_guide_template_background_color,
       accent_color     = var.river_guide_template_accent_color,
       region           = var.river_guide_template_region,
+      port             = var.river_guide_template_port,
       oidc_config      = var.river_guide_template_oidc,
     }
   )

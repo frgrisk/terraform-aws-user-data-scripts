@@ -11,6 +11,7 @@ echo "export RIVER_GUIDE_OIDC_CLIENT_SECRET='${oidc_config.client_secret}'" >> ~
 echo "@reboot root . ~/.bashrc && AWS_REGION=${region} /opt/river-guide %{if tags != null}--tags ${tags} %{endif}--title '${title}' \
 --background-color='${background_color}' \
 --accent-color='${accent_color}' \
+--port='${port}' \
 %{ if oidc_config != null ~}
 --oidc-issuer='${oidc_config.issuer}' \
 --oidc-client-id='${oidc_config.client_id}' \
