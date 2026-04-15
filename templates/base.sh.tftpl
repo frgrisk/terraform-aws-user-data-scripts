@@ -16,7 +16,7 @@ fi
 # Install AWS CLI if necessary
 if ! command -v aws > /dev/null; then
   echo "The AWS CLI is not installed. Installing..."
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -i).zip" -o "awscliv2.zip"
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip"
   unzip awscliv2.zip
   ./aws/install
   rm -rfv aws*

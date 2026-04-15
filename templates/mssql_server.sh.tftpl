@@ -1,9 +1,10 @@
 # Install MSSQL
 set -x
-curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/8/mssql-server-2022.repo
+RHEL_VERSION=$(rpm --eval '%rhel')
+curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/$RHEL_VERSION/mssql-server-2022.repo
 yum install -y mssql-server
 MSSQL_PID=Developer ACCEPT_EULA=Y MSSQL_SA_PASSWORD='${password}' /opt/mssql/bin/mssql-conf -n setup
-curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/8/prod.repo
+curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/$RHEL_VERSION/prod.repo
 ACCEPT_EULA=Y yum install -y mssql-tools unixODBC-devel
 echo '#!/bin/bash' > /etc/profile.d/mssql.sh
 # shellcheck disable=SC2016

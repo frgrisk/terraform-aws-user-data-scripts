@@ -5,9 +5,28 @@ if [[ $(uname -m) == aarch64 ]]; then
 else
    GOARCH=amd64
 fi
-curl -L https://github.com/frgrisk/river-guide/releases/download/v0.1.1/river-guide-linux-$GOARCH --output /opt/river-guide
+curl -L https://github.com/frgrisk/river-guide/releases/download/v0.3.0/river-guide-linux-$GOARCH --output /opt/river-guide
 chmod 755 /opt/river-guide
-echo "@reboot root AWS_REGION=${region} /opt/river-guide %{if tags != null}--tags ${tags} %{endif}--title '${title}' --primary-color '${color}'" | tee -a /etc/crontab > /dev/null
+echo "export RIVER_GUIDE_OIDC_CLIENT_SECRET='${oidc_config.client_secret}'" >> ~/.bashrc
+echo "@reboot root . ~/.bashrc && AWS_REGION=${region} /opt/river-guide %{if tags != null}--tags ${tags} %{endif}--title '${title}' \
+--background-color='${background_color}' \
+--accent-color='${accent_color}' \
+--port='${port}' \
+%{ if oidc_config != null ~}
+--oidc-issuer='${oidc_config.issuer}' \
+--oidc-client-id='${oidc_config.client_id}' \
+--oidc-redirect-url='${oidc_config.redirect_url}' \
+%{ if oidc_config.groups != null ~}
+--oidc-groups='${oidc_config.groups}' \
+%{ endif ~}
+%{ if oidc_config.scopes != null ~}
+--oidc-scopes='${oidc_config.scopes}' \
+%{ endif ~}
+%{ if oidc_config.log_claims != null ~}
+--oidc-log-claims='${oidc_config.log_claims}' \
+%{ endif ~}
+%{ endif ~}" \
+| tee -a /etc/crontab > /dev/null
 
 # Install Cronie (not included in Amazon Linux 2023 by default)
 dnf install -y cronie
