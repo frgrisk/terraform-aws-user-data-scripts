@@ -94,7 +94,15 @@ variable "river_guide_template_oidc" {
     scopes         = optional(string)
     log_claims     = optional(string)
   })
-  default = ""
+  default = {
+    issuer        = ""
+    client_id     = ""
+    client_secret = ""
+    redirect_url  = ""
+    groups        = ""
+    scopes        = ""
+    log_claims    = ""
+  }
 }
 
 variable "river_guide_template_region" {
