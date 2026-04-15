@@ -61,7 +61,7 @@ variable "certbot_template_test_cert" {
 
 variable "river_guide_template_tags" {
   type    = string
-  default = null
+  default = ""
 }
 
 variable "river_guide_template_title" {
@@ -94,7 +94,7 @@ variable "river_guide_template_oidc" {
     scopes         = optional(string)
     log_claims     = optional(string)
   })
-  default = null
+  default = ""
 }
 
 variable "river_guide_template_region" {
